@@ -13,5 +13,25 @@ module.exports.bootstrap = function(cb) {
 
   // It's very important to trigger this callback method when you are finished
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
+  sails.on('lifted', function() {
+    Admin
+      .find()
+      .exec(function(err, admin) {
+        if(err) {
+          sails.log.error(err);
+        }
+        else if ('undefined' === typeof admin || (Array.isArray(admin) && 0 === admin.length)) {
+          Admin.createDefaultAdmin()
+              .then(function(admin) {
+                sails.log(admin);
+              })
+              .catch(sails.log.error);
+        }
+        else {
+          sails.log('There is already an admin');
+        }
+      });
+  });
   cb();
+
 };

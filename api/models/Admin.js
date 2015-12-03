@@ -1,6 +1,7 @@
 'use strict';
 
 var sha1 = require('sha1');
+var q = require('q');
 
 /**
  * Admin.js
@@ -49,4 +50,30 @@ module.exports = {
     values.name = String(values.name).toUpperCase();
     cb();
   },
+
+  createDefaultAdmin: function() {
+
+    var deferred = q.defer();
+
+    var adminObj = {
+      firstname: 'John'
+      ,name: 'Doe'
+      ,password: 'admin'
+      ,email: 'admin@admin.admin'
+    };
+
+    Admin.create(adminObj, function(err, admin) {
+      if(err) {
+        deferred.reject(err);
+      }
+      else if ('undefined' === typeof admin){
+        deferred.reject(new Error('Admin not created'));
+      }
+      else {
+        deferred.resolve(adminObj);
+      }
+    });
+
+    return deferred.promise;
+  }
 };
