@@ -23,6 +23,17 @@ module.exports = {
   }
 
   /**
+   * Render the login view for admins
+   * @param req
+   * @param res
+   */
+  ,renderLogin: function(req, res) {
+    res.view('admin/login', {
+      layout: 'layout'
+    });
+  }
+
+  /**
    * @todo
    * @param req
    * @param res

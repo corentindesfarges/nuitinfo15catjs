@@ -50,6 +50,10 @@ module.exports.routes = {
     controller: 'AdminController'
     ,action: 'renderIndex'
   }
+  ,'GET /admin/login': {
+    controller: 'AdminController'
+    ,action: 'renderLogin'
+  }
   ,'POST /admin/session': {
     controller: 'AdminController'
     ,action: 'createSession'

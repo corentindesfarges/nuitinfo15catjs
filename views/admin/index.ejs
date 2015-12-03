@@ -1,6 +1,8 @@
+<h1 class="text-center">Bonjour <%- "Corentin" %></h1>
+
 <div class="row">
   <div class="small-12 medium-6 columns">
-    <h1>Notifications</h1>
+    <h1 class="text-center">Notifications</h1>
 
     <table>
       <thead>
@@ -10,15 +12,18 @@
       </tr>
       </thead>
       <tbody>
+
+      <% for(var i=0; i<3; i++) {%>
       <tr>
         <td>Il y a 2 min</td>
-        <td>Un attentat</td>
+        <td><a href="/admin/notification/<%- i %>">Un attentat</a></td>
       </tr>
+      <% } %>
       </tbody>
     </table>
   </div>
   <div class="small-12 medium-6 columns">
-    <h1>Liste des crises</h1>
+    <h1 class="text-center">Liste des crises</h1>
 
     <table>
       <thead>
@@ -28,10 +33,12 @@
       </tr>
       </thead>
       <tbody>
+      <% for(var i=0; i<3; i++) {%>
       <tr>
-        <td>Il y a 2 jours</td>
-        <td>Un attentat à Paris</td>
+        <td>Il y a 2 min</td>
+        <td><a href="/admin/crisis/<%- i %>">Un attentat à Paris</a></td>
       </tr>
+      <% } %>
       </tbody>
     </table>
   </div>
