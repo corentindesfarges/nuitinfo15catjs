@@ -12,7 +12,7 @@ module.exports = function (grunt) {
         dest: '.tmp/public',
         js_dest: '.tmp/public/js',
         css_dest: '.tmp/public/styles',
-        scss_dest: 'assets/styles/'
+        scss_dest: 'assets/styles'
       }
     });
 

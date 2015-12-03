@@ -17,7 +17,9 @@ module.exports = {
    * @param res
    */
   renderIndex: function(req, res) {
-    res.render('admin/index');
+    res.view('admin/index', {
+      layout: 'layout'
+    });
   }
 
   /**
