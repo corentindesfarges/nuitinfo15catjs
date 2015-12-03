@@ -29,7 +29,10 @@ module.exports = {
    */
   ,renderLogin: function(req, res) {
     res.view('admin/login', {
-      layout: 'layout'
+      layout: 'layout',
+      locals: {
+        admin: req.session.admin
+      }
     });
   }
 
@@ -43,7 +46,7 @@ module.exports = {
     var adminEmail = req.param('adminEmail');
     var adminPassword = req.param('adminPassword');
 
-    Admin.findByEmail(adminEmail, function(err, admin) {
+    Admin.findOneByEmail(adminEmail, function(err, admin) {
       if(err) {
         res.send(500);
       }
@@ -53,10 +56,11 @@ module.exports = {
       else {
         // There is an admin with this name
         // Checking password
-        if(sha1(adminPassword) === admin.password) {
+        if(sha1(adminPassword) == admin.password) {
           // Passwords match
-          req.session.user = admin.toJSON();
-          res.send(200);
+          sails.log.info('Admin logged in!');
+          req.session.admin = admin.toJSON();
+          res.redirect('/admin');
         }
         else {
           // Password doesn't match
