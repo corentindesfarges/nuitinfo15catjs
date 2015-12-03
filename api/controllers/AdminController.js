@@ -6,6 +6,10 @@
  */
 
 module.exports = {
-	
+
+  renderView: function(req, res) {
+    res.render('admin/index');
+  }
+
 };
 
