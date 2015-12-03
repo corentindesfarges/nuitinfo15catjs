@@ -47,8 +47,12 @@ module.exports.routes = {
   ***************************************************************************/
 
   ,'GET /admin': {
-    controller: 'AdminController',
-    action: 'renderIndex'
+    controller: 'AdminController'
+    ,action: 'renderIndex'
+  }
+  ,'POST /admin/session': {
+    controller: 'AdminController'
+    ,action: 'createSession'
   }
 
 };
