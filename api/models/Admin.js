@@ -27,6 +27,12 @@ module.exports = {
       type: 'EMAIL',
       required: true,
       unique: true
+    },
+
+    toJSON: function() {
+      var obj = this.toObject();
+      delete obj.password;
+      return obj;
     }
   }
 };
