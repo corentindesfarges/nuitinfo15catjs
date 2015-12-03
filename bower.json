@@ -1,0 +1,21 @@
+{
+  "name": "NuitInfo2015CatJS",
+  "description": "a Sails application",
+  "main": "app.js",
+  "authors": [
+    "fwoelffel"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/corentindesfarges/nuitinfo15catjs",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~5.5.3"
+  }
+}
