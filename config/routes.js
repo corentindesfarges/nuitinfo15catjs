@@ -46,4 +46,9 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+  ,'GET /admin': {
+    controller: 'AdminController',
+    action: 'renderIndex'
+  }
+
 };
