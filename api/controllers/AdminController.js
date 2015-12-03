@@ -7,7 +7,7 @@
 
 module.exports = {
 
-  renderView: function(req, res) {
+  renderIndex: function(req, res) {
     res.render('admin/index');
   }
 
