@@ -1,6 +1,6 @@
 'use strict';
 
-var sha1 = require('sha1')
+var sha1 = require('sha1');
 
 /**
  * AdminController
@@ -40,12 +40,12 @@ module.exports = {
    */
   ,createSession: function(req, res) {
 
-    var adminName = req.param('adminName');
+    var adminEmail = req.param('adminEmail');
     var adminPassword = req.param('adminPassword');
 
-    Admin.findByName(adminName, function(err, admin) {
+    Admin.findByEmail(adminEmail, function(err, admin) {
       if(err) {
-        res.error(500);
+        res.send(500);
       }
       else if ('undefined' === typeof admin) {
         res.send(404);
@@ -64,8 +64,6 @@ module.exports = {
         }
       }
     });
-
-    res.send(501);
   }
 };
 
