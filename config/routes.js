@@ -59,6 +59,10 @@ module.exports.routes = {
   }
 
   // HOME
+  ,'GET /': {
+    controller: 'CrisisController'
+    ,action: 'renderCrises'
+  }
   ,'GET /crisis': {
     controller: 'CrisisController'
     ,action: 'renderCrises'
