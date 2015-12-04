@@ -62,6 +62,18 @@ module.exports.routes = {
     controller: 'AdminController'
     ,action: 'deleteSession'
   }
+  ,'GET /admin/crisis/:id': {
+    controller: 'CrisisController'
+    ,action: 'renderAdmin'
+  }
+  ,'GET /admin/crisis/create' : {
+    controller: 'CrisisController'
+    ,action: 'renderCreation'
+  }
+  ,'POST /admin/crisis': {
+    controller: 'CrisisController'
+    ,action: 'createCrisis'
+  }
 
 
 };

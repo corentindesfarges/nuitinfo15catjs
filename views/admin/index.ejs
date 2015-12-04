@@ -1,3 +1,23 @@
+<% if (!admin) { %>
+<form action="/admin/session" method="POST">
+  <div class="row">
+    <label for="adminEmail">
+      <input type="email" name="adminEmail" required id="adminEmail" placeholder="Votre e-mail" />
+    </label>
+  </div>
+  <div class="row">
+    <label for="adminPassword">
+      <input type="password" name="adminPassword" required id="adminPassword" placeholder="Votre mot de passe" />
+    </label>
+  </div>
+  <div class="row">
+    <input type="submit" value="Se connecter"/>
+  </div>
+</form>
+
+<% }
+else { %>
+
 <h1 class="text-center">Bonjour <%- "Corentin" %></h1>
 
 <div class="row">
@@ -43,3 +63,4 @@
     </table>
   </div>
 </div>
+<%}%>
