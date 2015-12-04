@@ -67,5 +67,12 @@ module.exports = {
       }
     });
   }
+
+  ,deleteSession: function(req, res) {
+
+    req.session.admin = undefined;
+    res.redirect('/admin');
+
+  }
 };
 

@@ -58,5 +58,10 @@ module.exports.routes = {
     controller: 'AdminController'
     ,action: 'createSession'
   }
+  ,'DELETE /admin/session': {
+    controller: 'AdminController'
+    ,action: 'deleteSession'
+  }
+
 
 };
