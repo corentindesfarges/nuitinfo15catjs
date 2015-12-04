@@ -1,0 +1,12 @@
+{
+  "criticalWords": [
+    "attack", "dead", "tsunami", "seisme", "attentat", "fusillade"
+  ],
+  "logfile": "tweets.json",
+  "TwitterAPI": {
+    "consumer_key": "aq0EMEwHAA7EzJ2x02KhIyHry",
+    "consumer_secret": "uqX4Ums8uijvoooyJziMOIHS29LL0ZCqUgkjUM70xN9dLTJGOb",
+    "access_token": "1496409648-ih2AoUt5ggCcqo6CzwhFrpxQKSNZBhRJHFwfInG",
+    "access_token_secret": "6e1pyVjnFlRTNtQLxIL89m2k5XcQf3GtptPPlCTAHzbn3"
+  }
+}

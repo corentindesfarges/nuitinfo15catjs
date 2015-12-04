@@ -30,6 +30,8 @@ module.exports.bootstrap = function(cb) {
         else {
           sails.log('There is already an admin');
         }
+
+        detectCriticalWords();
       });
   });
   cb();
