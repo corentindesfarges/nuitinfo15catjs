@@ -72,25 +72,25 @@ module.exports.routes = {
     ,action: 'renderCrisis'
   }
 
-  // ROOM
-  ,'GET /room/:id' : { // TODO
-    controller: 'RoomController'
-    ,action: 'renderRoom'
-  }
-
-  // PRIVATEROOM
-  ,'POST /API/privateroom': { // TODO
-    controller: 'PrivateRoomController'
-    ,action: 'createPrivateRoom'
-  }
-  ,'GET /privateroom/:id': { // TODO
-    controller: 'PrivateRoomController'
-    ,action: 'renderPrivateRoom'
-  }
-  ,'DELETE /API/privateroom/:id': { // TODO
-    controller: 'PrivateRoomController'
-    ,action: 'destroyPrivateRoom'
-  }
+  // // ROOM
+  // ,'GET /room/:id' : { // TODO
+  //   controller: 'RoomController'
+  //   ,action: 'renderRoom'
+  // }
+  //
+  // // PRIVATEROOM
+  // ,'POST /API/privateroom': { // TODO
+  //   controller: 'PrivateRoomController'
+  //   ,action: 'createPrivateRoom'
+  // }
+  // ,'GET /privateroom/:id': { // TODO
+  //   controller: 'PrivateRoomController'
+  //   ,action: 'renderPrivateRoom'
+  // }
+  // ,'DELETE /API/privateroom/:id': { // TODO
+  //   controller: 'PrivateRoomController'
+  //   ,action: 'destroyPrivateRoom'
+  // }
 
 
 };
