@@ -12,7 +12,7 @@
     <% for(var i = 0; i < crises.length; i++) { %>
     <tr>
       <td>Il y a 2 min</td>
-      <td><a href="/admin/crisis/show/<%= crises[i].id %>">[<%= crises[i].type %>] <%= crises[i].localisation.city %></a></td>
+      <td><a href="/crisis/<%= crises[i].id %>">[<%= crises[i].type %>] <%= crises[i].localisation.city %></a></td>
     </tr>
     <% } %>
     </tbody>

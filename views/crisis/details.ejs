@@ -1,0 +1,203 @@
+<h1 class="text-center">Crise à <%=crisis.localisation.city%></h1>
+
+<div class="row">
+    <div class="small-5 columns">
+        <h2>Informations</h2>
+
+        <strong><%=crisis.type%></strong>
+
+        <p>Début : <%=crisis.startDate.toDateString()%> à <%=crisis.startDate.toTimeString()%></p>
+        <p>Fin : <%=crisis.endDate.toDateString()%> à <%=crisis.endDate.toTimeString()%></p>
+
+        <p>Position GPS : <%=crisis.localisation.longitude%>/<%=crisis.localisation.latitude%></p>
+        <p><%=crisis.localisation.city%> en <%=crisis.localisation.country%></p>
+
+    </div>
+    <div class="small-2 columns"><a href=""><h1>+</h1></a></div>
+    <div class="small-5 columns">
+        <div id="map"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="small-12 column end" style="text-align: center;">
+
+        <div>
+            My name: <input type="text" id="my-name"> <button id="update-name">Update</button>
+        </div>
+        <h1>Users online</h1>
+        <div>
+            <select id="users-list" size="5"></select>
+            <button id="private-msg-button">Send private message to selected user</button>
+            <div id="convos"></div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    #map {
+        width: 500px;
+        height: 500px;
+    }
+</style>
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script>
+
+    io.socket.on('connect', function socketConnected() {
+
+        // Show the main UI
+        $('#main').show();
+
+        // Announce that a new user is online--in this somewhat contrived example,
+        // this also causes the CREATION of the user, so each window/tab is a new user.
+        io.socket.get("/user/announce", function(data){
+            window.me = data;
+            updateMyName(data);
+
+            joinRoom("<%= crisis.id %>", "<%= crisis.type %>");
+
+            // Get the current list of users online.  This will also subscribe us to
+            // update and destroy events for the individual users.
+            io.socket.get('/user', updateUserList);
+
+        });
+
+        // Listen for the "room" event, which will be broadcast when something
+        // happens to a room we're subscribed to.  See the "autosubscribe" attribute
+        // of the Room model to see which messages will be broadcast by default
+        // to subscribed sockets.
+        io.socket.on('room', function messageReceived(message) {
+
+            switch (message.verb) {
+
+                // Handle room creation
+                case 'created':
+                    addRoom(message.data);
+                    break;
+
+                // Handle a user joining a room
+                case 'addedTo':
+                    // Post a message in the room
+                    postStatusMessage('room-messages-'+message.id, $('#user-'+message.addedId).text()+' has joined');
+                    // Update the room user count
+                    increaseRoomCount(message.id);
+                    break;
+
+                // Handle a user leaving a room
+                case 'removedFrom':
+                    // Post a message in the room
+                    postStatusMessage('room-messages-'+message.id, $('#user-'+message.removedId).text()+' has left');
+                    // Update the room user count
+                    decreaseRoomCount(message.id);
+                    break;
+
+                // Handle a room being destroyed
+                case 'destroyed':
+                    removeRoom(message.id);
+                    break;
+
+                // Handle a public message in a room.  Only sockets subscribed to the "message" context of a
+                // Room instance will get this message--see the "join" and "leave" methods of RoomController.js
+                // to see where a socket gets subscribed to a Room instance's "message" context.
+                case 'messaged':
+                    receiveRoomMessage(message.data);
+                    break;
+
+                default:
+                    break;
+
+            }
+
+        });
+
+        // Listen for the "user" event, which will be broadcast when something
+        // happens to a user we're subscribed to.  See the "autosubscribe" attribute
+        // of the User model to see which messages will be broadcast by default
+        // to subscribed sockets.
+        io.socket.on('user', function messageReceived(message) {
+
+            switch (message.verb) {
+
+                // Handle user creation
+                case 'created':
+                    addUser(message.data);
+                    break;
+
+                // Handle a user changing their name
+                case 'updated':
+
+                    // Get the user's old name by finding the <option> in the list with their ID
+                    // and getting its text.
+                    var oldName = $('#user-'+message.id).text();
+
+                    // Update the name in the user select list
+                    $('#user-'+message.id).text(message.data.name);
+
+                    // If we have a private convo with them, update the name there and post a status message in the chat.
+                    if ($('#private-username-'+message.id).length) {
+                        $('#private-username-'+message.id).html(message.data.name);
+                        postStatusMessage('private-messages-'+message.id,oldName+' has changed their name to '+message.data.name);
+                    }
+
+                    break;
+
+                // Handle user destruction
+                case 'destroyed':
+                    removeUser(message.id);
+                    break;
+
+                // Handle private messages.  Only sockets subscribed to the "message" context of a
+                // User instance will get this message--see the onConnect logic in config/sockets.js
+                // to see where a new user gets subscribed to their own "message" context
+                case 'messaged':
+                    receivePrivateMessage(message.data);
+                    break;
+
+                default:
+                    break;
+            }
+
+        });
+
+        // Add a click handler for the "Update name" button, allowing the user to update their name.
+        // updateName() is defined in user.js.
+        $('#update-name').click(updateName);
+
+        // Add a click handler for the "Send private message" button
+        // startPrivateConversation() is defined in private_message.js.
+        $('#private-msg-button').click(startPrivateConversation);
+
+        console.log('Socket is now connected!');
+
+
+
+        // When the socket disconnects, hide the UI until we reconnect.
+        io.socket.on('disconnect', function() {
+            // Hide the main UI
+            $('#main').hide();
+            $('#disconnect').show();
+        });
+
+    });
+
+
+    (function initMap() {
+        var myLatLng = {lat: <%= crisis.localisation.longitude %>, lng: <%= crisis.localisation.latitude %>};
+
+        // Create a map object and specify the DOM element for display.
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: myLatLng,
+            scrollwheel: false,
+            zoom: 10
+        });
+
+        // Create a marker and set its position.
+        var marker = new google.maps.Marker({
+            map: map,
+            position: myLatLng,
+            animation: google.maps.Animation.BOUNCE,
+            title: "<%= crisis.type %>"
+        });
+    })();
+</script>

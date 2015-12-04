@@ -44,7 +44,7 @@ module.exports.bootstrap = function (cb) {
           startDate: new Date(),
           endDate: new Date(),
           localisation: location,
-          type: 'Attaque de Stormtooper'
+          type: 'Attaque de Stormtrooper'
         })
           .then(function (crisis) {
             sails.log(crisis);

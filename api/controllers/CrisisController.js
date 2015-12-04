@@ -93,7 +93,8 @@ module.exports = {
 
     ,renderCrisis: function(req, res) {
         Crisis
-            .findOne(req.param(id))
+            .findOne(req.param('id'))
+            .populate('localisation')
             .exec(function(err, crisis) {
                 if (err) {
                     res.send(500);
