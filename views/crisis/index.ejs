@@ -1,0 +1,20 @@
+<div class="small-12 medium-6 columns">
+  <h1 class="text-center">Liste des crises</h1>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Heure</th>
+      <th>Titre</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for(var i = 0; i < crises.length; i++) { %>
+    <tr>
+      <td>Il y a 2 min</td>
+      <td><a href="/admin/crisis/show/<%= crises[i].id %>">[<%= crises[i].type %>] <%= crises[i].localisation.city %></a></td>
+    </tr>
+    <% } %>
+    </tbody>
+  </table>
+</div>

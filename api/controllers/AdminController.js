@@ -17,10 +17,15 @@ module.exports = {
    * @param res
    */
   renderIndex: function(req, res) {
-    res.view('admin/index', {
-      layout: 'layout',
-      admin: req.session.admin
+    Crisis.find().exec(function(err, lcrisis){
+
+      res.view('admin/index', {
+        layout: 'layout',
+        admin: req.session.admin,
+        lcrisis : lcrisis
+      });
     });
+
   }
 
   /**

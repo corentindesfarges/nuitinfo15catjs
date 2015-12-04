@@ -41,7 +41,7 @@ else { %>
       <% for(var i=0; i<3; i++) {%>
       <tr>
         <td>Il y a 2 min</td>
-        <td><a href="/admin/notification/<%- i %>">Un attentat</a></td>
+        <td><a href="/admin/crisis/create">Un attentat</a></td>
       </tr>
       <% } %>
       </tbody>
@@ -58,14 +58,18 @@ else { %>
       </tr>
       </thead>
       <tbody>
-      <% for(var i=0; i<3; i++) {%>
+      <% for(var i=0; i<lcrisis.length; i++) {%>
       <tr>
         <td>Il y a 2 min</td>
-        <td><a href="/admin/crisis/<%- i %>">Un attentat à Paris</a></td>
+        <td><a href="/admin/crisis/show/<%= lcrisis[i].id %>">[<%= lcrisis[i].type %>] <%= lcrisis[i].startDate %></a></td>
       </tr>
       <% } %>
       </tbody>
     </table>
   </div>
+</div>
+
+<div class="row">
+  <a href="/admin/crisis/create"><h3>Créer une crise</h3></a></div>
 </div>
 <%}%>
