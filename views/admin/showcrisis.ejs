@@ -1,34 +1,24 @@
-<% if (!admin) { %> <%- partial ('login.ejs') %> <% } else { %>
-<h1 class="text-center">Création d'une crise</h1>
+<h1 class="text-center">Crise : <%=crisis.type%></h1>
 
-<form action="/admin/session" method="POST">
-  <div class="row">
-    <label for="crisisType">
-      Type de la crise
-      <select name="crisisType" id="crisisType">
-        <%for(var i = 0; i < 5; i ++){ %>
-        <option value="<%=i%>"><%="Type "+i%></option>
-        <%}%>
-      </select>
-    </label>
+<div class="row">
+  <div class="small-4 columns">
+    <h2>Informations</h2>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias autem consequuntur cupiditate, eum explicabo fugiat iure, iusto laboriosam maxime nemo nesciunt nobis, non odit quas repudiandae similique soluta velit vitae!</p>
+
   </div>
-  <div class="row">
-    <label for="adminPassword">
-      <input type="password" name="adminPassword" required id="adminPassword" placeholder="Votre mot de passe" />
-    </label>
+  <div class="small-4 columns"><a href=""><h1>+</h1></a></div>
+  <div class="small-4 columns"><h2>CARTE</h2></div>
+</div>
+
+
+<div class="row">
+  <div class="small-4 columns">
+    <ul>
+      <%for(var i = 0; i < 5; i ++){ %>
+      <li>Personne <%=i%></li>
+      <%}%>
+    </ul>
+
   </div>
-  <div class="row">
-    <label for="crisisGravity">
-      Gravité de la crise
-      <select name="crisisGravity" id="crisisGravity">
-        <%for(var i = 0; i < 5; i ++){ %>
-        <option value="<%=i%>"><%="Gravité "+i%></option>
-        <%}%>
-      </select>
-    </label>
-  </div>
-  <div class="row">
-    <input type="submit" value="Se connecter"/>
-  </div>
-</form>
-<% } %>
+</div>

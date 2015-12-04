@@ -59,7 +59,7 @@ module.exports.routes = {
     controller: 'AdminController'
     ,action: 'createSession'
   }
-  ,'DELETE /API/admin/session': {
+  ,'POST /API/admin/session/delete': {
     controller: 'AdminController'
     ,action: 'deleteSession'
   }

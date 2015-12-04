@@ -1,47 +1,81 @@
-<% if (!admin) { %> <%- partial ('login.ejs') %> <% } else { %>
 <h1 class="text-center">Création d'une crise</h1>
 
-<div class="row">
-  <div class="small-12 medium-6 columns">
-    <h1 class="text-center">Notifications</h1>
-
-    <table>
-      <thead>
-      <tr>
-        <th>Heure</th>
-        <th>Titre</th>
-      </tr>
-      </thead>
-      <tbody>
-
-      <% for(var i=0; i<3; i++) {%>
-      <tr>
-        <td>Il y a 2 min</td>
-        <td><a href="/admin/notification/<%- i %>">Un attentat</a></td>
-      </tr>
-      <% } %>
-      </tbody>
-    </table>
+<form action="/API/crisis" method="POST">
+  <div class="row">
+    <label for="crisisType">
+      Type de la crise
+      <select name="crisisType" id="crisisType">
+        <%
+        var types = ['Attentat', 'Catastrophe naturel', 'Attaque de zombie', 'Stormtrooper : contre-attaque de l\'Empire']
+        for(var i = 0; i < 4; i ++){ %>
+        <option value="<%=types[i]%>"><%=types[i]%></option>
+        <%}%>
+      </select>
+    </label>
   </div>
-  <div class="small-12 medium-6 columns">
-    <h1 class="text-center">Liste des crises</h1>
-
-    <table>
-      <thead>
-      <tr>
-        <th>Heure</th>
-        <th>Titre</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% for(var i = 0; i < 3; i++) { %>
-      <tr>
-        <td>Il y a 2 min</td>
-        <td><a href="/admin/crisis/<%- i %>">Un attentat à Paris</a></td>
-      </tr>
-      <% } %>
-      </tbody>
-    </table>
+  <div class="row">
+    <label for="crisisGravity">
+      Gravité de la crise
+      <select name="crisisGravity" id="crisisGravity">
+        <%
+        var gravities = ['Critique', 'Moyenne', 'Faible']
+        for(var i = 0; i < 3; i ++){ %>
+        <option value="<%=gravities[i]%>"><%=gravities[i]%></option>
+        <%}%>
+      </select>
+    </label>
   </div>
-</div>
-<% } %>
+  <div class="row">
+    <h4>Position géographique</h4>
+    <label for="posLat">
+      Position latitude
+      <input type="text" name="posLat" required id="posLat" placeholder="44.5485651211" />
+    </label>
+  </div>
+  <div class="row">
+    <label for="posLong">
+      Position longtitude
+      <input type="text" name="posLong" required id="posLong" placeholder="-2.48651534152" />
+    </label>
+  </div>
+  <div class="row">
+    <label for="city">
+      Ville
+      <input type="text" name="city" required id="city" placeholder="Paris, Strasbourg.." />
+    </label>
+  </div>
+  <div class="row">
+    <label for="state">
+      Pays
+      <input type="text" name="state" required id="state" placeholder="France, Allemagne, ..." />
+    </label>
+  </div>
+  <div class="row">
+    <h4>Position temporelle</h4>
+    <label for="dateBeginCrisis">
+      Date de début d'apparition de la crise
+      <input type="date" name="dateBeginCrisis" required id="dateBeginCrisis"/>
+    </label>
+  </div>
+  <div class="row">
+    <label for="timeBeginCrisis">
+      Heure de début d'apparition de la crise
+      <input type="time" name="timeBeginCrisis" required id="timeBeginCrisis"/>
+    </label>
+  </div>
+  <div class="row">
+    <label for="dateEndCrisis">
+      Date de fin d'apparition de la crise
+      <input type="date" name="dateEndCrisis" required id="dateEndCrisis"/>
+    </label>
+  </div>
+  <div class="row">
+    <label for="timeEndCrisis">
+      Heure de fin d'apparition de la crise
+      <input type="time" name="timeEndCrisis" required id="timeEndCrisis"/>
+    </label>
+  </div>
+  <div class="row">
+    <input type="submit" value="Valider"/>
+  </div>
+</form>

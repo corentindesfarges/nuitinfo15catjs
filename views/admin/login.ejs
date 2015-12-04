@@ -1,7 +1,7 @@
-<form action="/admin/session" method="POST">
+<form action="/API/admin/session" method="POST">
   <div class="row">
     <label for="adminEmail">
-      <input type="email" name="adminEmail" required id="adminEmail" placeholder="Votre e-mail" />
+      <input type="email" name="adminEmail" required id="adminEmail" placeholder="Votre e-mail" value="<%= req.adminEmail %>" />
     </label>
   </div>
   <div class="row">
