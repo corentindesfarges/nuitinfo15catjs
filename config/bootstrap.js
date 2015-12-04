@@ -34,22 +34,56 @@ module.exports.bootstrap = function (cb) {
       });
 
 
-    Location.create({
-      longitude: '46,8512541',
-      latitude: '-46,8512541',
-      city: 'Dijon',
-      country: 'France'
-    }, function (err, location) {
-      Crisis.create({
-        startDate: new Date(),
-        endDate: new Date(),
-        localisation: location,
-        type: 'Attaque de Stormtooper'
-      })
-        .then(function (crisis) {
-          sails.log(crisis);
-        });
-    });
+      Location.create({
+        longitude: '46,8512541',
+        latitude: '-46,8512541',
+        city: 'Dijon',
+        country: 'France'
+      }, function (err, location) {
+        Crisis.create({
+          startDate: new Date(),
+          endDate: new Date(),
+          localisation: location,
+          type: 'Attaque de Stormtooper'
+        })
+          .then(function (crisis) {
+            sails.log(crisis);
+          });
+      });
+
+      Location.create({
+        longitude: '47,8512541',
+        latitude: '-46,8515541',
+        city: 'ST JEAN DES PRES',
+        country: 'Francemagne'
+      }, function (err, location) {
+        Crisis.create({
+          startDate: new Date(),
+          endDate: new Date(),
+          localisation: location,
+          type: 'Les Chats contre attaquent'
+        })
+          .then(function (crisis) {
+            sails.log(crisis);
+          });
+      });
+
+      Location.create({
+        longitude: '47,8512541',
+        latitude: '-46,8515541',
+        city: 'Berlin',
+        country: 'Deutsch'
+      }, function (err, location) {
+        Crisis.create({
+          startDate: new Date(),
+          endDate: new Date(),
+          localisation: location,
+          type: 'Fred wOLF is Back...'
+        })
+          .then(function (crisis) {
+            sails.log(crisis);
+          });
+      });
 
     //detectCriticalWords();
   });
