@@ -18,7 +18,8 @@ module.exports = {
    */
   renderIndex: function(req, res) {
     res.view('admin/index', {
-      layout: 'layout'
+      layout: 'layout',
+      admin: req.session.admin
     });
   }
 
@@ -29,11 +30,8 @@ module.exports = {
    */
   ,renderLogin: function(req, res) {
     res.view('admin/login', {
-      layout: 'layout',
-      locals: {
-        admin: req.session.admin
-      }
-    });
+        layout: 'layout'
+      });
   }
 
   /**
