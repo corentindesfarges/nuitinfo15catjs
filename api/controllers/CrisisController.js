@@ -19,7 +19,7 @@ module.exports = {
                     res.send(404);
                 }
                 else {
-                    res.view('crisis/admin', {
+                    res.view('admin/showcrisis', {
                         crisis: crisis
                     });
                 }
@@ -27,13 +27,13 @@ module.exports = {
     }
 
     ,renderCreation: function(req, res) {
-        res.view('crisis/creation', {
+        res.view('admin/createcrisis', {
             layout: 'layout'
         });
     }
 
     ,createCrisis: function(req, res) {
-        if('undefined' === typeof req.param('crisis')) {
+        if('undefined' === typeof req.params) {
             res.send(400);
         }
         else {

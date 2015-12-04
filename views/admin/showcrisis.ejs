@@ -1,0 +1,34 @@
+<% if (!admin) { %> <%- partial ('login.ejs') %> <% } else { %>
+<h1 class="text-center">Création d'une crise</h1>
+
+<form action="/admin/session" method="POST">
+  <div class="row">
+    <label for="crisisType">
+      Type de la crise
+      <select name="crisisType" id="crisisType">
+        <%for(var i = 0; i < 5; i ++){ %>
+        <option value="<%=i%>"><%="Type "+i%></option>
+        <%}%>
+      </select>
+    </label>
+  </div>
+  <div class="row">
+    <label for="adminPassword">
+      <input type="password" name="adminPassword" required id="adminPassword" placeholder="Votre mot de passe" />
+    </label>
+  </div>
+  <div class="row">
+    <label for="crisisGravity">
+      Gravité de la crise
+      <select name="crisisGravity" id="crisisGravity">
+        <%for(var i = 0; i < 5; i ++){ %>
+        <option value="<%=i%>"><%="Gravité "+i%></option>
+        <%}%>
+      </select>
+    </label>
+  </div>
+  <div class="row">
+    <input type="submit" value="Se connecter"/>
+  </div>
+</form>
+<% } %>

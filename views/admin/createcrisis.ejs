@@ -1,0 +1,47 @@
+<% if (!admin) { %> <%- partial ('login.ejs') %> <% } else { %>
+<h1 class="text-center">Création d'une crise</h1>
+
+<div class="row">
+  <div class="small-12 medium-6 columns">
+    <h1 class="text-center">Notifications</h1>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Heure</th>
+        <th>Titre</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <% for(var i=0; i<3; i++) {%>
+      <tr>
+        <td>Il y a 2 min</td>
+        <td><a href="/admin/notification/<%- i %>">Un attentat</a></td>
+      </tr>
+      <% } %>
+      </tbody>
+    </table>
+  </div>
+  <div class="small-12 medium-6 columns">
+    <h1 class="text-center">Liste des crises</h1>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Heure</th>
+        <th>Titre</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% for(var i = 0; i < 3; i++) { %>
+      <tr>
+        <td>Il y a 2 min</td>
+        <td><a href="/admin/crisis/<%- i %>">Un attentat à Paris</a></td>
+      </tr>
+      <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<% } %>

@@ -65,11 +65,11 @@ module.exports.routes = {
   }
 
   // CRISIS
-  ,'GET /crisis/admin/create' : {
+  ,'GET /admin/crisis/create' : {
     controller: 'CrisisController'
     ,action: 'renderCreation'
   }
-  ,'GET /crisis/admin/:id': {
+  ,'GET /admin/crisis/show/:id': {
     controller: 'CrisisController'
     ,action: 'renderAdmin'
   }
