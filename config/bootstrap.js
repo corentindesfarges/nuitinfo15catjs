@@ -35,8 +35,8 @@ module.exports.bootstrap = function (cb) {
 
 
       Location.create({
-        longitude: '46,8512541',
-        latitude: '-46,8512541',
+        longitude: '48.5089507',
+        latitude: '2.2775173',
         city: 'Dijon',
         country: 'France'
       }, function (err, location) {
@@ -52,8 +52,8 @@ module.exports.bootstrap = function (cb) {
       });
 
       Location.create({
-        longitude: '47,8512541',
-        latitude: '-46,8515541',
+        longitude: '48.8589507',
+        latitude: '2.2775173',
         city: 'ST JEAN DES PRES',
         country: 'Francemagne'
       }, function (err, location) {
@@ -69,8 +69,8 @@ module.exports.bootstrap = function (cb) {
       });
 
       Location.create({
-        longitude: '47,8512541',
-        latitude: '-46,8515541',
+        longitude: '48.4589507',
+        latitude: '2.2775173',
         city: 'Berlin',
         country: 'Deutsch'
       }, function (err, location) {

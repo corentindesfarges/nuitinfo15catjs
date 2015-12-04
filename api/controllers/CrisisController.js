@@ -9,6 +9,7 @@ module.exports = {
     renderAdmin: function(req, res) {
         Crisis
             .findOne(req.param('id'))
+            .populate('localisation')
             .exec(function(err, crisis) {
                 if (err) {
                     sails.log.error(err);

@@ -1,14 +1,22 @@
-<h1 class="text-center">Crise : <%=crisis.type%></h1>
+<h1 class="text-center">Crise à <%=crisis.localisation.city%></h1>
 
 <div class="row">
-  <div class="small-4 columns">
+  <div class="small-5 columns">
     <h2>Informations</h2>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias autem consequuntur cupiditate, eum explicabo fugiat iure, iusto laboriosam maxime nemo nesciunt nobis, non odit quas repudiandae similique soluta velit vitae!</p>
+    <strong><%=crisis.type%></strong>
+
+    <p>Début : <%=crisis.startDate.toDateString()%> à <%=crisis.startDate.toTimeString()%></p>
+    <p>Fin : <%=crisis.endDate.toDateString()%> à <%=crisis.endDate.toTimeString()%></p>
+
+    <p>Position GPS : <%=crisis.localisation.longitude%>/<%=crisis.localisation.latitude%></p>
+    <p><%=crisis.localisation.city%> en <%=crisis.localisation.country%></p>
 
   </div>
-  <div class="small-4 columns"><a href=""><h1>+</h1></a></div>
-  <div class="small-4 columns"><h2>CARTE</h2></div>
+  <div class="small-2 columns"><a href=""><h1>+</h1></a></div>
+  <div class="small-5 columns">
+    <div id="map"></div>
+  </div>
 </div>
 
 
@@ -22,3 +30,23 @@
 
   </div>
 </div>
+
+<style>
+  #map {
+    width: 500px;
+    height: 500px;
+  }
+</style>
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script>
+  function initialize() {
+    var mapCanvas = document.getElementById('map');
+    var mapOptions = {
+      center: new google.maps.LatLng(<%=crisis.localisation.longitude%>, <%=crisis.localisation.latitude%>),
+      zoom: 8,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var map = new google.maps.Map(mapCanvas, mapOptions)
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
