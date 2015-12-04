@@ -1,35 +1,46 @@
 <% if (!admin) { %>
 
-<form action="/API/admin/session" method="POST">
-  <div class="row">
-    <label for="adminEmail">
-      <input type="email" name="adminEmail" required id="adminEmail" placeholder="Votre e-mail" />
-    </label>
-  </div>
-  <div class="row">
-    <label for="adminPassword">
-      <input type="password" name="adminPassword" required id="adminPassword" placeholder="Votre mot de passe" />
-    </label>
-  </div>
-  <div class="row">
-    <input type="submit" value="Se connecter"/>
-  </div>
-</form>
+<div class="small-12 medium-offset-8 medium-4 columns">
+  <br/>
+
+  <h2 class="text-center">Connexion à l'interface d'administration</h2>
+
+  <p class="text-center"><em>admin@admin.admin – admin</em></p>
+  <br/>
+
+  <form action="/API/admin/session" method="POST">
+    <div class="row">
+      <label for="adminEmail">
+        <input type="email" name="adminEmail" required id="adminEmail" placeholder="Votre e-mail"/>
+      </label>
+    </div>
+    <div class="row">
+      <label for="adminPassword">
+        <input type="password" name="adminPassword" required id="adminPassword" placeholder="Votre mot de passe"/>
+      </label>
+    </div>
+    <div class="row">
+      <input type="submit" class="button" value="Se connecter"/>
+    </div>
+  </form>
+</div>
+
 
 <% }
 else { %>
 
-<form action="/API/admin/session/delete" method="POST">
-  <button type="submit">Se déconnecter</button>
-</form>
-
-<h1 class="text-center">Bonjour <%- "Corentin" %></h1>
-
 <div class="row">
-  <div class="small-12 medium-6 columns">
-    <h1 class="text-center">Notifications</h1>
 
-    <table>
+  <form class="float-right" action="/API/admin/session/delete" method="POST">
+    <button class="button" type="submit">Se déconnecter</button>
+  </form>
+
+  <h1 class="text-center">Bonjour <%- admin.firstname %></h1>
+
+  <div class="small-12 medium-6 columns">
+    <h3 class="text-center">Notifications</h3>
+
+    <table width="100%">
       <thead>
       <tr>
         <th>Heure</th>
@@ -38,9 +49,9 @@ else { %>
       </thead>
       <tbody>
 
-      <% for(var i=0; i<3; i++) {%>
+      <% for(var i = 0; i < 3; i++) { %>
       <tr>
-        <td>Il y a 2 min</td>
+        <td>Il y a <%= 1+i * 2 %> min</td>
         <td><a href="/admin/crisis/create">Un attentat</a></td>
       </tr>
       <% } %>
@@ -48,9 +59,9 @@ else { %>
     </table>
   </div>
   <div class="small-12 medium-6 columns">
-    <h1 class="text-center">Liste des crises</h1>
+    <h3 class="text-center">Liste des crises</h3>
 
-    <table>
+    <table width="100%">
       <thead>
       <tr>
         <th>Heure</th>
@@ -58,9 +69,9 @@ else { %>
       </tr>
       </thead>
       <tbody>
-      <% for(var i=0; i<lcrisis.length; i++) {%>
+      <% for(var i = 0; i < lcrisis.length; i++) { %>
       <tr>
-        <td>Il y a 2 min</td>
+        <td>Il y a <%= 1+(i * 2) % 7 %> min</td>
         <td><a href="/admin/crisis/show/<%= lcrisis[i].id %>">[<%= lcrisis[i].type %>] <%= lcrisis[i].startDate %></a></td>
       </tr>
       <% } %>
@@ -72,4 +83,4 @@ else { %>
 <div class="row">
   <a href="/admin/crisis/create"><h3>Créer une crise</h3></a></div>
 </div>
-<%}%>
+<% } %>
