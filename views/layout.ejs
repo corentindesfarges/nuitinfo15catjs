@@ -65,7 +65,8 @@
           document.body.style.backgroundColor = "rgb(50, 50, 50)";
           break;
           case 69: force += "e";
-          document.body.style.backgroundImage = "url(/images/blackcat.png)";
+          if(force == force_ok)
+            document.body.style.backgroundImage = "url(/images/blackcat.png)";
           break;
           default: force = "";
           document.body.style.backgroundColor = "rgb(255, 255, 255)";
