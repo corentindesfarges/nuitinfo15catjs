@@ -46,6 +46,7 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+  // ADMIN
   ,'GET /admin': {
     controller: 'AdminController'
     ,action: 'renderIndex'
@@ -54,23 +55,25 @@ module.exports.routes = {
     controller: 'AdminController'
     ,action: 'renderLogin'
   }
-  ,'POST /admin/session': {
+  ,'POST /API/admin/session': {
     controller: 'AdminController'
     ,action: 'createSession'
   }
-  ,'DELETE /admin/session': {
+  ,'DELETE /API/admin/session': {
     controller: 'AdminController'
     ,action: 'deleteSession'
   }
-  ,'GET /admin/crisis/:id': {
-    controller: 'CrisisController'
-    ,action: 'renderAdmin'
-  }
-  ,'GET /admin/crisis/create' : {
+
+  // CRISIS
+  ,'GET /crisis/admin/create' : {
     controller: 'CrisisController'
     ,action: 'renderCreation'
   }
-  ,'POST /admin/crisis': {
+  ,'GET /crisis/admin/:id': {
+    controller: 'CrisisController'
+    ,action: 'renderAdmin'
+  }
+  ,'POST /API/crisis': {
     controller: 'CrisisController'
     ,action: 'createCrisis'
   }
